@@ -44,6 +44,11 @@ Requirements
 # <http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf>`_ architecture from 
 # LeCun et al., 1998.
 
+
+print(torch.cuda.is_available())
+print()
+
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class LeNet(nn.Module):
@@ -85,11 +90,18 @@ print('list(module.named_parameters()) =')
 print(list(module.named_parameters()))
 print()
 
+
+
 ######################################################################
 print('list(module.named_buffers()) =')
 print(list(module.named_buffers()))
 print()
 
+
+
+print('module.weight =')
+print(module.weight)
+print()
 
 ######################################################################
 # Pruning a Module
@@ -249,7 +261,9 @@ print('model.state_dict().keys() =')
 print(model.state_dict().keys())
 print()
 
-
+print('conv1.weight_mask =')
+print(module.weight_mask)
+print()
 
 ######################################################################
 # Remove pruning re-parametrization
@@ -412,7 +426,7 @@ print(
 # ``structured``, and ``unstructured``). This is needed to determine
 # how to combine masks in the case in which pruning is applied
 # iteratively. In other words, when pruning a pre-pruned parameter,
-# the current prunining technique is expected to act on the unpruned
+# the current pruning technique is expected to act on the unpruned
 # portion of the parameter. Specifying the ``PRUNING_TYPE`` will
 # enable the ``PruningContainer`` (which handles the iterative
 # application of pruning masks) to correctly identify the slice of the
